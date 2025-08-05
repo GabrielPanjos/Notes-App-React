@@ -14,11 +14,17 @@ function Note({
   const [note, setNote] = useState(children);
   const [changeColor, setchangeColor] = useState(false);
 
+  const [firstNote, setFirstNote] = useState("");
+
   function switchChangeColorState() {
     const newChangeColorState = !changeColor;
 
     setchangeColor(newChangeColorState);
   }
+
+  useEffect(() => {
+    setFirstNote(note);
+  }, []);
 
   useEffect(() => {
     saveNote(noteId, note);
@@ -52,7 +58,7 @@ function Note({
             contentEditable="true"
             className="w-full  min-h-[300px] rounded-b-[1px] bg-neutral-50 p-5"
           >
-            {note}
+            {firstNote}
           </div>
         </div>
         {changeColor ? <ChangeColor /> : ""}
