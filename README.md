@@ -21,7 +21,7 @@ Aplicativo de anotações simples feito com React, permitindo adicionar, editar,
 
 🔗 Acesse o projeto online:
 
-👉 [to-do-list-em-react.vercel.app](https://to-do-list-em-react-kappa.vercel.app)
+👉 [to-do-list-em-react.vercel.app](https://notes-app-react-pi-two.vercel.app)
 
 ---
 
