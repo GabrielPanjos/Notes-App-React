@@ -63,9 +63,20 @@ function App() {
       id: Date.now(),
       date: getFormattedDate(),
       note: "",
+      isCompleted: false,
     };
     setNotes([...notes, newNote]);
     return;
+  }
+
+  function noteCompleted(noteId) {
+    const newNotes = notes.map((note) => {
+      if (note.id === noteId) {
+        note.isCompleted = !note.isCompleted;
+      }
+      return note;
+    });
+    setNotes(newNotes);
   }
 
   function deleteNote(noteId) {
@@ -78,7 +89,10 @@ function App() {
     <div className="w-screen h-screen bg-blue-50 flex justify-center">
       <div className="w-[560px] space-y-4">
         <div className="flex justify-center gap-20 mt-[20px] mb-[50px]">
-          <h1 className="text-orange-400 text-[2em] text-center font-bold">
+          <h1
+            className="text-orange-400 text-[2em] text-center font-bold"
+            style={{ textShadow: "1px 1px 0px rgb(223, 182, 93)" }}
+          >
             React Note
           </h1>
           <CreateNote createNote={createNote} notes={notes}>
@@ -87,6 +101,8 @@ function App() {
         </div>
         {notes.map((note) => (
           <Note
+            noteIsCompleted={note.isCompleted}
+            noteCompleted={noteCompleted}
             saveNote={saveNote}
             noteId={note.id}
             deleteNote={deleteNote}
