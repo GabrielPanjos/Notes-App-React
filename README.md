@@ -17,6 +17,14 @@ Aplicativo de anotações simples feito com React, permitindo adicionar, editar,
 - TailwindCSS
 - Lucide React Icons
 
+## 📸 Preview
+
+🔗 Acesse o projeto online:
+
+👉 [to-do-list-em-react.vercel.app](https://to-do-list-em-react-kappa.vercel.app)
+
+---
+
 ## 📦 Instalação
 
 ```bash
