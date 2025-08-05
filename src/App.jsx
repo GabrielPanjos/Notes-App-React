@@ -9,6 +9,28 @@ function App() {
     JSON.parse(localStorage.getItem("notes")) || []
   );
 
+  const colors = {
+    neutral: { color: "bg-neutral-50", shadowColor: "bg-neutral-200" },
+    orange: { color: "bg-orange-200", shadowColor: "bg-orange-300" },
+    purple: { color: "bg-purple-200", shadowColor: "bg-purple-300" },
+    pink: { color: "bg-pink-200", shadowColor: "bg-pink-300" },
+    red: { color: "bg-red-200", shadowColor: "bg-red-300" },
+    yellow: { color: "bg-yellow-100", shadowColor: "bg-yellow-400" },
+    blue: { color: "bg-blue-200", shadowColor: "bg-blue-300" },
+    green: { color: "bg-green-200", shadowColor: "bg-green-300" },
+  };
+
+  function changeColorNote(noteId, color, shadowColor) {
+    const newNotes = notes.map((note) => {
+      if (note.id === noteId) {
+        note.color = color;
+        note.shadowColor = shadowColor;
+      }
+      return note;
+    });
+    setNotes(newNotes);
+  }
+
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
@@ -64,6 +86,8 @@ function App() {
       date: getFormattedDate(),
       note: "",
       isCompleted: false,
+      color: colors.neutral.color,
+      shadowColor: colors.neutral.shadowColor,
     };
     setNotes([...notes, newNote]);
     return;
@@ -80,9 +104,12 @@ function App() {
   }
 
   function deleteNote(noteId) {
-    const newNotes = notes.filter((note) => note.id !== noteId);
+    if (confirm("Tem certeza que deseja remover essa nota?")) {
+      const newNotes = notes.filter((note) => note.id !== noteId);
 
-    setNotes(newNotes);
+      setNotes(newNotes);
+    }
+    return;
   }
 
   return (
@@ -101,6 +128,10 @@ function App() {
         </div>
         {notes.map((note) => (
           <Note
+            shadowColor={note.shadowColor}
+            color={note.color}
+            changeColorNote={changeColorNote}
+            colors={colors}
             noteIsCompleted={note.isCompleted}
             noteCompleted={noteCompleted}
             saveNote={saveNote}

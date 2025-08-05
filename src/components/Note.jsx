@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import ChangeColor from "./ChangeColor";
 
 function Note({
+  shadowColor,
+  color,
+  changeColorNote,
+  colors,
   noteId,
   date,
   deleteNote,
@@ -38,7 +42,9 @@ function Note({
         }`}
       >
         <div className="bg-neutral-50 min-w-[560px] min-h-[340px] rounded-[1px] shadow-[1px_1px_4px_0px_rgb(136,136,136)]">
-          <div className="w-full h-10 bg-neutral-200 rounded-t-[1px] p-2 flex items-center justify-between">
+          <div
+            className={`w-full h-10 ${shadowColor} rounded-t-[1px] p-2 flex items-center justify-between`}
+          >
             <span className="text-blue-400 italic text-xs ml-2">{date}</span>
             <div className="flex gap-2 mr-2 items-center ">
               <button
@@ -56,12 +62,21 @@ function Note({
           <div
             onInput={(e) => setNote(e.currentTarget.innerText)}
             contentEditable="true"
-            className="w-full  min-h-[300px] rounded-b-[1px] bg-neutral-50 p-5"
+            suppressContentEditableWarning={true}
+            className={`w-full  min-h-[300px] rounded-b-[1px] ${color} p-5`}
           >
             {firstNote}
           </div>
         </div>
-        {changeColor ? <ChangeColor /> : ""}
+        {changeColor ? (
+          <ChangeColor
+            noteId={noteId}
+            changeColorNote={changeColorNote}
+            colors={colors}
+          />
+        ) : (
+          ""
+        )}
       </li>
     </ul>
   );
