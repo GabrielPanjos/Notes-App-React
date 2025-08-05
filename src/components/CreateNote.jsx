@@ -1,5 +1,5 @@
-function CreateNote({ children }) {
-  return <button>{children}</button>;
+function CreateNote({ children, createNote }) {
+  return <button onClick={() => createNote()}>{children}</button>;
 }
 
 export default CreateNote;
